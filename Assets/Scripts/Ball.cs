@@ -4,51 +4,55 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-   public float speed;
-   public Rigidbody2D rb;
-   public Vector3 startPosition;
+    public float speed;
+    public Rigidbody2D rb;
+    public Vector3 startPosition;
 
-private float x;
-private float y;
+    public AudioSource bounce;
 
+    private float x;
+    private float y;
 
-
-void Start()
-{
-    startPosition = transform.position;
-    Launch();
-}
-
-private void Launch()
-{
-    if (Random.Range(0, 2) == 0)
+    void Start()
     {
-        x = -1;
-
-    }
-    else
-    {
-        x = 1;
+        startPosition = transform.position;
+        Launch();
     }
 
-    if (Random.Range(0, 2) == 0)
+    private void Launch()
     {
-        y = -1;
+        if (Random.Range(0, 2) == 0)
+        {
+            x = -1;
+
+        }
+        else
+        {
+            x = 1;
+        }
+
+        if (Random.Range(0, 2) == 0)
+        {
+            y = -1;
+
+        }
+        else
+        {
+            y = 1;
+        }
+
+        rb.velocity = new Vector2(speed * x, speed * y);
 
     }
-    else
+
+    public void Reset()
     {
-        y = 1;
+        rb.velocity = Vector2.zero; transform.position = startPosition;
+        Launch();
     }
 
-    rb.velocity = new Vector2(speed * x, speed * y);
-
-}
-
-public void Reset()
-{
-    rb.velocity = Vector2.zero; transform.position = startPosition;
-    Launch();
-}
-
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        bounce.Play();
+    }
 }

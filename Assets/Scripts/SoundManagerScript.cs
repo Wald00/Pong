@@ -5,31 +5,33 @@ using UnityEngine;
 public class SoundManagerScript : MonoBehaviour
 {
 
-    public static AudioClip bounceSound;
-    static AudioSource audioSrc;
-
-   
-    void Start()
-    {
-        bounceSound = Resources.Load<AudioClip> ("bounce");
-
-        audioSrc = GetComponent<AudioSource> ();
-    }
+	public AudioClip bounceSound;
+	public AudioSource audioSrc;
 
 
-    void Update()
-    {
-        
-    }
+	void Start()
+	{
+		//bounceSound = Resources.Load<AudioClip>("bounce");
 
-    public static void PlaySound (string clip)
-    {
-        switch (clip) {
-            case "bounce":
-            audioSrc.PlayOneShot (bounceSound);
+		// This gets the audio in the game scene and sets the variable to it.
+		audioSrc = GetComponent<AudioSource>();
+	}
 
-            break;
 
-        }
-    }
+	void Update()
+	{
+
+	}
+
+	public static void PlaySound(string clip)
+	{
+		switch (clip)
+		{
+			case "bounce":
+				
+
+				break;
+
+		}
+	}
 }
